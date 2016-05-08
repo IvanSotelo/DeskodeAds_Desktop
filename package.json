@@ -1,27 +1,21 @@
 {
-  "name": "electron-quick-start",
+  "name": "DeskodeAds_Desktop",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "App Deskode Ads",
   "main": "main.js",
   "scripts": {
     "start": "electron main.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/electron/electron-quick-start.git"
+    "url": "https://github.com/IvanSotelo/DeskodeAds_Desktop.git"
   },
-  "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial"
-  ],
-  "author": "GitHub",
+  "author": "Deskode",
   "license": "CC0-1.0",
   "bugs": {
-    "url": "https://github.com/electron/electron-quick-start/issues"
+    "url": "https://github.com/IvanSotelo/DeskodeAds_Desktop/issues"
   },
-  "homepage": "https://github.com/electron/electron-quick-start#readme",
+  "homepage": "http://deskode.com",
   "devDependencies": {
     "electron-prebuilt": "^0.37.8"
   }
