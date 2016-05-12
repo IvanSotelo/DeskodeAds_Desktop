@@ -13,7 +13,8 @@
   "author": "Deskode",
   "license": "CC0-1.0",
   "dependencies": {
-    "jquery": "^2.1.4"
+    "jquery": "^2.1.4",
+    "nconf": "^0.8.4"
   },
   "bugs": {
     "url": "https://github.com/IvanSotelo/DeskodeAds_Desktop/issues"
@@ -22,5 +23,4 @@
   "devDependencies": {
     "electron-prebuilt": "^0.37.8"
   }
-
 }
