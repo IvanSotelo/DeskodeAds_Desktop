@@ -1,3 +1,9 @@
+//
+//Comprobamos
+//
+
+
+
 var myPlayer,
   eVideoName = document.getElementById("videoName"),
   eTimeRemaining = document.getElementById("timeRemaining"),

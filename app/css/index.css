@@ -1,8 +1,7 @@
 
 html,
 body {
-  font-family: LatoWebSemibold;
-  font-style: normal;
+  font-family: 'LatoWeb';
   background-color: #000;
   -webkit-app-region: drag;
 }
@@ -31,8 +30,8 @@ Form
   width:100%;
   height:100%;
   z-index:1000;
-  background: #000;
-  opacity: 0.7;
+  background: linear-gradient(135deg, #222532 0%, #1A1A20 100%);
+  opacity: 0.95;
 }
 
 .form-box{
@@ -41,21 +40,30 @@ Form
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-background: #181a1d;
+    background: linear-gradient(45deg, #35394a 0%, #1f222e 100%);
 margin: 30px auto;
 max-width: 500px;
-box-shadow: 0 3px 6px 0px rgba(0,0,0,0.16), 0 3px 6px 0px rgba(0,0,0,0.23);
+box-shadow: 0 10px 50px 0px rgba(0,0,0,0.2), 0 10px 10px 0px rgba(0,0,0,0.23);
 }
 form#login-form {
 overflow: hidden;
 position: relative;
-padding: 40px;
+margin: 30px 60px 60px 60px;
+}
+.info{
+  margin: 60px 60px 10px;
+}
+.info p{
+  color: #fff;
+  text-align: center;
+  font-size: 13px;
+  margin: auto;
 }
 .head {
 color: #fff;
-font-size: 34px;
-font-weight: bold;
-padding: 50px 0;
+font-size: 16px;
+font-family: 'LatoWebBlack';
+padding: 20px 0;
 text-align: center;
 text-transform: uppercase;
 background: #41b7eb;
@@ -68,7 +76,7 @@ background: #41b7eb;
 }
 
 .form-group .label-control {
-  color: #81828f;
+  color:#fff;
   display: block;
   font-size: 14px;
   position: absolute;
@@ -94,7 +102,7 @@ background: #41b7eb;
 }
 
 .form-group .label-control::after {
-  border-bottom: 2px solid #03A9F4;
+  border-bottom: 2px solid #41b7eb;
   -webkit-transform: translate3d(-100%, 0, 0);
   transform: translate3d(-100%, 0, 0);
   -webkit-transition: -webkit-transform 0.3s;
@@ -103,12 +111,17 @@ background: #41b7eb;
 
 .form-control {
   border: none;
-  background: #181a1d;
+  background: transparent;
   border-radius: 0;
   margin-top: 20px;
   padding: 12px 0;
   width: 100%;
   font-size: 14px;
+  color: #fff;
+}
+.form-control .list{
+  background-color: transparent;
+  color: #fff;
 }
 .form-control:focus {
   outline: none;
@@ -136,7 +149,7 @@ background: #41b7eb;
     -webkit-transform: scale(0.9);
     -moz-transform: scale(0.9);
     transform: scale(0.9);
-    color: #03A9F4 !important;
+    color: #41b7eb !important;
 }
 
 .input-field label:before{
@@ -145,32 +158,33 @@ background: #41b7eb;
   bottom: 0;
   left: 0;
   width: 100%;
-  border-bottom: 1px solid #B9C1CA;
+  border-bottom: 1px solid #41b7eb;
   transition: transform 0.3s;
   -webkit-transition: -webkit-transform 0.3s;
 }
 
 
 input.btn[type="submit"] {
-  background: #41b7eb;
-  border:none;
-  border-radius: 2px;
-  color: #fff;
+  background:transparent;
+  border:2px solid #41b7eb;
+  border-radius:50px;
+  color: #41b7eb;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  letter-spacing: 3px;
-  margin: 5px 0;
+  font-size: 11px;
+  font-family: LatoWeb;
+  letter-spacing: 2px;
+  margin: 35px 0;
   outline: medium none;
   overflow: hidden;
-  padding: 10px;
+  padding:10px 50px;
   text-transform: uppercase;
-  transition: all 0.15s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
   width: 100%;
   box-shadow: 0 1px 2px 0px rgba(0,0,0,0.16), 0 1px 2px 0px rgba(0,0,0,0.23);
 }
 input.btn[type="submit"]:hover {
-  background: #4b81eb;
+  color:white;
+  background: #41b7eb;
   box-shadow: 0 2px 4px 0px rgba(0,0,0,0.16), 0 2px 4px 0px rgba(0,0,0,0.23);
 }
 .text-p{
