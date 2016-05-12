@@ -3,19 +3,72 @@
   <head>
     <meta charset="UTF-8">
     <title>Deskode Ads</title>
-    <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
-    <link href="css/index.css" rel="stylesheet" type="text/css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="css/fakeLoader.css">
   </head>
-  <body>
-    <h1>Hello World!</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
-  </body>
+<body>
+  <div class="light-box"></div>
+  <div class="form-box">
+  <div class="head">Registro de Pantalla</div>
+  <form action="#" id="login-form">
+      <div class="form-group">
+        <label class="label-control">
+          <span class="label-text">Email</span>
+        </label>
+        <input type="email" name="email" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label class="label-control">
+          <span class="label-text">Password</span>
+        </label>
+        <input type="password" name="password" class="form-control" />
+      </div>
+      <div class="form-footer">
+        <input type="submit" value="Login" class="btn" />
+      </div>
+  </form>
+</div>
+    <div class="fakeloader"></div>
+    <div class="container" style="display:none">
+      <div class="player-block">
+        <video id="video_1" class="video-js"></video>
+      </div>
+    </div>
 
-  <script>
-    // You can also require other files to run in this process
-    require('./renderer.js')
-  </script>
+    <ul class="shots"></ul>
+
+    <script>
+      // You can also require other files to run in this process
+      require('./renderer.js')
+
+    </script>
+    <script>window.$ = window.jQuery = require('jquery');</script>
+    <script src="js/fakeLoader.js"></script>
+    <script type="text/javascript">
+      $(window).load(function(){
+          $(".fakeloader").fakeLoader({
+              timeToHide:12200,
+              bgColor:"#1A1A20",
+              imagePath:"img/load1.gif",
+          });
+          $('.form-group input').on('focus blur', function (e) {
+              $(this).parents('.form-group').toggleClass('active', (e.type === 'focus' || this.value.length > 0));
+          }).trigger('blur');
+      });
+    </script>
+    <script src="js/jdeskodeads-1.0.0.js"></script>
+    <script>
+    $.jdeskodeads.getPantallaVideos(6, function(Pantalla){
+        var html = [];
+        html.push('<li><b>clientes: </b>' + JSON.stringify(Pantalla.videos) + '</li>');
+
+        $('.shots').html(html.join(''));
+      });
+    </script>
+    <script src="js/index.min.js"></script>
+    <script src="js/secondsToTime.js"></script>
+    <script src="js/index.js"></script>
+
+  </body>
 </html>
