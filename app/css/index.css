@@ -1,8 +1,10 @@
 
 html,
 body {
-    background-color: #000;
-    -webkit-app-region: drag;
+  font-family: LatoWebSemibold;
+  font-style: normal;
+  background-color: #000;
+  -webkit-app-region: drag;
 }
 
 .player-block{
@@ -52,7 +54,7 @@ padding: 40px;
 .head {
 color: #fff;
 font-size: 34px;
-font-weight: normal;
+font-weight: bold;
 padding: 50px 0;
 text-align: center;
 text-transform: uppercase;
@@ -66,7 +68,7 @@ background: #41b7eb;
 }
 
 .form-group .label-control {
-  color: #888;
+  color: #81828f;
   display: block;
   font-size: 14px;
   position: absolute;
@@ -101,6 +103,7 @@ background: #41b7eb;
 
 .form-control {
   border: none;
+  background: #181a1d;
   border-radius: 0;
   margin-top: 20px;
   padding: 12px 0;
@@ -149,7 +152,7 @@ background: #41b7eb;
 
 
 input.btn[type="submit"] {
-  background: #6498fe;
+  background: #41b7eb;
   border:none;
   border-radius: 2px;
   color: #fff;
