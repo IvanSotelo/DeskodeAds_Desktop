@@ -1,8 +1,16 @@
-//
-//Comprobamos
-//
+//////////////////////////////////////////////////
+//                                              //
+//Comprobamos si existe una configuracion previa//
+//                                              //
+//////////////////////////////////////////////////
+'use strict';
 
+var ipc = require('ipc');
+var configuration = require('../configuration');
 
+if (!configuration.readSettings('shortcutKeys')) {
+    alert('Hola');
+}
 
 var myPlayer,
   eVideoName = document.getElementById("videoName"),
