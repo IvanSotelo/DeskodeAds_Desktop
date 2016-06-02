@@ -42,7 +42,7 @@
     <div class="fakeloader"></div>
     <div class="container" style="display:none">
       <div class="player-block">
-        <video id="video_1" class="video-js" autoplay=""></video>
+        <video id="video_1" class="video-js" type="video/mp4"></video>
       </div>
     </div>
 
@@ -60,12 +60,7 @@
     </script>
     <script src="js/jdeskodeads-1.0.0.js"></script>
     <script>
-    $.jdeskodeads.getPantallaVideos(6, function(Pantalla){
-        var html = [];
-        html.push('<li><b>clientes: </b>' + JSON.stringify(Pantalla.videos) + '</li>');
 
-        $('.shots').html(html.join(''));
-      });
     </script>
     <script src="js/index.min.js"></script>
     <script src="js/secondsToTime.js"></script>

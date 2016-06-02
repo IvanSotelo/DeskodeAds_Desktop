@@ -1,13 +1,54 @@
+/**
+ * DeskodeAds v@VERSION
+ *DeskodeAds Developer,
+ * http://ads.deskode.com
+ *
+ * Copyright (c) 2016 Ivan Sotelo
+ * http://deskode.com
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+ * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ *
+ * Build Date: @DATE
+ *
+ */
+
+'use strict';
+
+var ipc = require('ipc');
+var configuration = require('../configuration');
+var myPlayer,
+eVideoName = document.getElementById("videoName"),
+eTimeRemaining = document.getElementById("timeRemaining"),
+timeRemaining,
+totalTime,
+currentVideoIndex = 0,
+newVideo,
+firstVideo = true,
+playlistData;
+
 //////////////////////////////////////////////////
 //                                              //
 //Comprobamos si existe una configuracion previa//
 //                                              //
 //////////////////////////////////////////////////
-'use strict';
-
-var ipc = require('ipc');
-var configuration = require('../configuration');
-
 if (!configuration.readSettings('pantalla-Id')) {
     $('.light-box').show();
     $('.form-box').show();
@@ -19,6 +60,8 @@ if (!configuration.readSettings('pantalla-Id')) {
     }).trigger('blur');
 
     get_loc();
+    configuration.saveSettings('pantalla-Id', '42');
+
     function get_loc() {
            if (navigator.geolocation) {
               navigator.geolocation.getCurrentPosition(coordenadas);
@@ -32,8 +75,6 @@ if (!configuration.readSettings('pantalla-Id')) {
     }
 
 
-        configuration.saveSettings('pantalla-Id', '42');
-alert(configuration.readSettings('pantalla-Id'));
 }else {
 
 
@@ -43,49 +84,30 @@ alert(configuration.readSettings('pantalla-Id'));
           bgColor:"#1A1A20",
           imagePath:"img/load1.gif",
       });
-      $.jdeskodeads.getPantallaVideos(configuration.readSettings('pantalla-Id'), function(Pantalla){
-          var playlistData = JSON.stringify(Pantalla.videos);
-        });
+
+
   });
 
+  $.jdeskodeads.getPantallaVideos(configuration.readSettings('pantalla-Id'), function(Pantalla){
+      playlistData = Pantalla.videos;
+          loadVideo();
+  });
 
-  var myPlayer,
-    eVideoName = document.getElementById("videoName"),
-    eTimeRemaining = document.getElementById("timeRemaining"),
-    timeRemaining,
-    totalTime,
-    currentVideoIndex = 0,
-    newVideo,
-    firstVideo = true,
-    playlistData = [{
-      "name": "Great Blue Heron",
-      "thumbnailURL": "//solutions.brightcove.com/bcls/assets/images/Great-Blue-Heron.png",
-      "sources": [{
-        "type": "application/x-mpegURL",
-        "src": "video/1.mp4"
-      }, {
-        "type": "video/mp4",
-        "src": "video/1.mp4"
-      }]
-    }, {
-      "name": "Birds of a Feather",
-      "thumbnailURL": "http://solutions.brightcove.com/bcls/assets/images/BirdsOfAFeather.png",
-      "sources": [{
-        "type": "video/mp4",
-        "src": "http://solutions.brightcove.com/bcls/assets/videos/BirdsOfAFeather.mp4"
-      }]
-    }, {
-      "name": "Sea Marvels",
-      "thumbnailURL": "http://solutions.brightcove.com/bcls/assets/images/Sea Marvels.png",
-      "sources": [{
-        "type": "video/mp4",
-        "src": "http://solutions.brightcove.com/bcls/assets/videos/Sea-Marvels.mp4"
-      }]
-    }];
+  videojs("video_1").ready(function () {
+    myPlayer = this;
+    myPlayer.on("ended", function () {
+      loadVideo();
+    });
+    myPlayer.on("timeupdate", function (evt) {
+    });
+    // load the first video
+
+  });
+
   function loadVideo() {
     if (currentVideoIndex < playlistData.length) {
       // load the new video
-      myPlayer.src(playlistData[currentVideoIndex].sources);
+      myPlayer.src(playlistData[currentVideoIndex].URL);
 
       // increment the current video index
       currentVideoIndex++;
@@ -100,15 +122,4 @@ alert(configuration.readSettings('pantalla-Id'));
       loadVideo();
     }
   };
-  videojs("video_1").ready(function () {
-    myPlayer = this;
-    myPlayer.on("ended", function () {
-      loadVideo();
-    });
-    myPlayer.on("timeupdate", function (evt) {
-
-    });
-    // load the first video
-    loadVideo();
-  });
 }

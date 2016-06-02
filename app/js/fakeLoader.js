@@ -89,6 +89,7 @@
         //Time to hide fakeLoader
         setTimeout(function(){
             $('.container').show();
+            myPlayer.play();
             $(el).fadeOut();
         }, settings.timeToHide);
 
