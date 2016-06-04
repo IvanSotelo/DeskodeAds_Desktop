@@ -1,6 +1,6 @@
 /**
  * DeskodeAds v@VERSION
- *DeskodeAds Developer,
+ * DeskodeAds Developer,
  * http://ads.deskode.com
  *
  * Copyright (c) 2016 Ivan Sotelo
@@ -30,19 +30,20 @@
  *
  */
 
-'use strict';
+ 'use strict';
 
-var ipc = require('ipc');
-var configuration = require('../configuration');
-var myPlayer,
-eVideoName = document.getElementById("videoName"),
-eTimeRemaining = document.getElementById("timeRemaining"),
-timeRemaining,
-totalTime,
-currentVideoIndex = 0,
-newVideo,
-firstVideo = true,
-playlistData;
+  //Variable;
+  var ipc = require('ipc'),//Comunicacion con sistema
+  configuration = require('../configuration'), //Configuracion local
+  eVideoName = document.getElementById("videoName"),//Video
+  eTimeRemaining = document.getElementById("timeRemaining"),
+  myPlayer,
+  timeRemaining,
+  totalTime,
+  currentVideoIndex = 0,
+  newVideo,
+  firstVideo = true,
+  playlistData=playlistData=configuration.readSettings('Videos');
 
 //////////////////////////////////////////////////
 //                                              //
@@ -62,35 +63,20 @@ if (!configuration.readSettings('pantalla-Id')) {
     get_loc();
     configuration.saveSettings('pantalla-Id', '42');
 
-    function get_loc() {
-           if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition(coordenadas);
-           }else{
-              alert('Este navegador es algo antiguo, actualiza para usar el API de localización');                  }
-    }
-
-    function coordenadas(position) {
-      var lat = position.coords.latitude;
-      var lon = position.coords.longitude;
-    }
-
-
 }else {
 
-
-  $(window).load(function(){
       $(".fakeloader").fakeLoader({
           timeToHide:12200,
           bgColor:"#1A1A20",
           imagePath:"img/load1.gif",
       });
 
-
-  });
-
   $.jdeskodeads.getPantallaVideos(configuration.readSettings('pantalla-Id'), function(Pantalla){
-      playlistData = Pantalla.videos;
-          loadVideo();
+      if(Pantalla.videos){
+        playlistData = Pantalla.videos;
+        configuration.saveSettings('Videos',Pantalla.videos);
+      }
+
   });
 
   videojs("video_1").ready(function () {
@@ -98,28 +84,38 @@ if (!configuration.readSettings('pantalla-Id')) {
     myPlayer.on("ended", function () {
       loadVideo();
     });
-    myPlayer.on("timeupdate", function (evt) {
-    });
-    // load the first video
-
   });
-
-  function loadVideo() {
-    if (currentVideoIndex < playlistData.length) {
-      // load the new video
-      myPlayer.src(playlistData[currentVideoIndex].URL);
-
-      // increment the current video index
-      currentVideoIndex++;
-      // play the video
-      if (firstVideo) {
-        firstVideo = false;
-      } else {
-        myPlayer.play();
-      }
-    }else {
-      currentVideoIndex = 0;
-      loadVideo();
-    }
-  };
 }
+
+//////////////////////////////////////////////////
+//                                              //
+//              Funciones Globales              //
+//                                              //
+//////////////////////////////////////////////////
+
+function loadVideo() {
+  if (currentVideoIndex < playlistData.length) {
+    // load the new video
+    myPlayer.src(playlistData[currentVideoIndex].URL);
+    // increment the current video index
+    currentVideoIndex++;
+    // play the video
+    myPlayer.play();
+  }else {
+    currentVideoIndex = 0;
+    loadVideo();
+  }
+};
+
+function get_loc() {
+  if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(coordenadas);
+  }else{
+      alert('Este navegador es algo antiguo, actualiza para usar el API de localización');
+  }
+};
+
+function coordenadas(position) {
+  var lat = position.coords.latitude;
+  var lon = position.coords.longitude;
+};
