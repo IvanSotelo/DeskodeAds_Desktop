@@ -53,11 +53,11 @@
 				$.ajax({
 						type: 'POST',
 						url:  API_URL + path,
-						data: dataPost,
+						data: JSON.stringify(dataPost),
+						contentType: 'application/json',
 						dataType: 'json',
 						success: function (data) {
 								 args[0](data);
-								 alert(dataPost);
 						}
 				});
 		};

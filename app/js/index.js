@@ -44,6 +44,8 @@
   currentVideoIndex = 0,
   newVideo,
   firstVideo = true,
+  lat,
+  lon,
   playlistData=configuration.readSettings('Videos');
 
 //////////////////////////////////////////////////
@@ -51,49 +53,37 @@
 //Comprobamos si existe una configuracion previa//
 //                                              //
 //////////////////////////////////////////////////
-if (!configuration.readSettings('pantalla-Id')) {
-    $('.light-box').show();
-    $('.form-box').show();
-    $('.form-group input').on('focus blur', function (e) {
-        $(this).parents('.form-group').toggleClass('active', (e.type === 'focus' || this.value.length > 0));
-    }).trigger('blur');
-    $('.form-group select').on('focus blur', function (e) {
-        $(this).parents('.form-group').toggleClass('active', (e.type === 'focus' || this.value.length > 0));
-    }).trigger('blur');
+if (!configuration.readSettings('Pantalla-Id')) {
+  $('.light-box').show();
+  $('.form-box').show();
+  $('.form-group input').on('focus blur', function (e) {
+      $(this).parents('.form-group').toggleClass('active', (e.type === 'focus' || this.value.length > 0));
+  }).trigger('blur');
+  $('.form-group select').on('focus blur', function (e) {
+      $(this).parents('.form-group').toggleClass('active', (e.type === 'focus' || this.value.length > 0));
+  }).trigger('blur');
 
-    get_loc();
+  get_loc();
 
-//    $.jdeskodeads.postPantalla(datosPantalla,function(Pantalla){
-  //      if(Pantalla.){
-    //      playlistData = Pantalla.videos;
-      //    configuration.saveSettings('Videos',Pantalla.videos);
-        //}
-//    });
+  $('#login-form').submit(function(event){
+  event.preventDefault();
+      datosPantalla = new pantalla($('#categoria-form').val(), $('#ubicacion-form').val(), $('#red-form').val(), lat, lon);
 
-
-
+      $.jdeskodeads.postPantalla(datosPantalla,function(Pantallas){
+            configuration.saveSettings('Pantalla-Id',Pantallas.Pantalla.IdPantalla);
+            location.reload();
+      });
+  });
 
 }else {
-      datosPantalla = [{
-      "Categoria_id": "88",
-      "Ubicacion": "DMairlo",
-      "Red_id": "462340709",
-      "Lat": "30.415832",
-      "Lng": "-107.913646"
-    }];
-      $.jdeskodeads.postPantalla(datosPantalla,function(Pantalla){
-          if(Pantalla){
-            alert(Pantalla.IdPantalla);
-          }
-      });
 
-      $(".fakeloader").fakeLoader({
-          timeToHide:12200,
-          bgColor:"#1A1A20",
-          imagePath:"img/load1.gif",
-      });
+  $(".fakeloader").fakeLoader({
+      timeToHide:12200,
+      bgColor:"#1A1A20",
+      imagePath:"img/load1.gif",
+  });
 
-  $.jdeskodeads.getPantallaVideos(configuration.readSettings('pantalla-Id'), function(Pantalla){
+  $.jdeskodeads.getPantallaVideos(configuration.readSettings('Pantalla-Id'), function(Pantalla){
       if(Pantalla.videos){
         playlistData = Pantalla.videos;
         configuration.saveSettings('Videos',Pantalla.videos);
@@ -137,6 +127,14 @@ function get_loc() {
 };
 
 function coordenadas(position) {
-  var lat = position.coords.latitude;
-  var lon = position.coords.longitude;
+  lat = position.coords.latitude;
+  lon = position.coords.longitude;
+};
+
+function pantalla(dato1, dato2, dato3, dato4, dato5) {
+  this.Categoria_id = dato1;
+  this.Ubicacion = dato2;
+  this.Red_id = dato3;
+  this.Lat = dato4;
+  this.Lng = dato5;
 };
