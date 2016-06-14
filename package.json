@@ -4,7 +4,8 @@
   "description": "App Deskode Ads",
   "main": "main.js",
   "scripts": {
-    "start": "electron main.js"
+    "start": "electron main.js",
+    "package": "electron-packager ./ DeskodeAds --all --out ~/DeskodeAds --version 1.0.0 --overwrite"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
   },
   "homepage": "http://deskode.com",
   "devDependencies": {
+    "electron-packager": "^7.0.4",
     "electron-prebuilt": "^0.37.8"
   }
 }
