@@ -32,6 +32,8 @@
 
  'use strict';
 
+  const os = require('os')
+  const homeDir = os.homedir()
   //Variable;
   var ipc = require('ipc'),//Comunicacion con sistema
   configuration = require('../configuration'), //Configuracion local
@@ -106,8 +108,9 @@ if (!configuration.readSettings('Pantalla-Id')) {
 
 function loadVideo() {
   if (currentVideoIndex < playlistData.length) {
+
     // load the new video
-    myPlayer.src(playlistData[currentVideoIndex].URL);
+    myPlayer.src(homeDir + '/'+playlistData[currentVideoIndex].URL);
     // increment the current video index
     currentVideoIndex++;
     // play the video
