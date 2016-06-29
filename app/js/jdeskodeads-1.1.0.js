@@ -36,7 +36,7 @@
     $.jdeskodeads = {};
 
 		var ACCESS_TOKEN = null;
-		var API_URL = 'http://ads.deskode.local/api/v1';
+		var API_URL = 'http://ads.deskode.com/api/v1';
 
     var jsonpGET = function (path,args) {
         $.ajax({
